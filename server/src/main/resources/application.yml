@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    platform: postgresql
+    url: jdbc:postgresql://localhost:5432/robot
+    driverClassName: org.postgresql.Driver
+    username: robot
+    password: robot
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      
+server:
+  port: 9999

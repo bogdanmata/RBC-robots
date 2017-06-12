@@ -16,6 +16,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -38,6 +39,9 @@ public class UserEntity {
   @Id
   @Column(name = "username")
   private String               username;
+  
+  @Column(name = "password")
+  private String               password;
 
   @Column(name = "first_name")
   private String               firstName;
@@ -48,6 +52,7 @@ public class UserEntity {
   @Column(name = "email_address")
   private String               emailAddress;
 
+  @OneToMany(mappedBy = "user")
   private List<UserRoleEntity> roles;
 
 }
