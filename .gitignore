@@ -2,5 +2,6 @@
 /server/.project
 /server/.settings
 /server/target
-/client/node_module
+/client/node_modules
 /client/dist
+
