@@ -28,6 +28,7 @@
     "@types/node": "^7.0.31",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-filter": "^5.0.0",
     "gulp-typescript": "^3.1.7",
     "ts-node": "~3.0.6",
     "tslint": "~5.4.3",

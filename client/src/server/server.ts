@@ -18,7 +18,7 @@ const server = http.createServer(function(req, res) {
     var regexString = /(^\/js\/)|(^\/css\/)/g;
     regexString.exec(originalFile);
 
-    var fileName = (regexString.lastIndex == 0) || ('\/' == originalFile) ? './../app/index.html' : './../app' + originalFile;
+    var fileName = (regexString.lastIndex != 0) || ('\/' == originalFile) ? './../app/index.html' : './../app' + originalFile;
     console.log('Requested resource: \"' + originalFile + '\" -> \"' + fileName + '\"');
     fs.readFile(fileName, 'utf8', function(err, data) {
       if(err){

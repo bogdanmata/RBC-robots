@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const del = require('del');
+const filter = require('gulp-filter');
 const typescript = require('gulp-typescript');
 const tscConfig = require('./tsconfig.json');
 
@@ -21,6 +22,14 @@ gulp.task('compile-client', function () {
     .pipe(gulp.dest('dist/app'));
 });
 
+gulp.task('copy-libraries', function(){
+  const libs = filter(['**', '!*testing.umd.min.js'], {restore: false, passthrough: true})
+  return gulp
+    .src('node_modules/@angular/**/bundles/*.umd.min.js')
+    .pipe(libs)
+    .pipe(gulp.dest('dist/app/libs'));
+});
+
 gulp.task('copy-assests', function(){
   return gulp
     .src('src/client/**/*.html')
@@ -35,7 +44,7 @@ gulp.task('compile-server', function () {
     .pipe(gulp.dest('dist/server'));
 });
 
-gulp.task('build-client', ['clean-client', 'compile-client', 'copy-assests']);
+gulp.task('build-client', ['clean-client', 'compile-client', 'copy-libraries', 'copy-assests']);
 gulp.task('build-server', ['clean-server', 'compile-server']);
 gulp.task('build', ['build-server', 'build-client']);
 gulp.task('default', ['build']);

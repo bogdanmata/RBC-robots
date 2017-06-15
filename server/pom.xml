@@ -33,6 +33,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+        
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -98,6 +104,9 @@
         <filtering>true</filtering>
         <includes>
           <include>**/*.yml</include>
+          <include>**/*.html</include>
+          <include>**/*.js</include>
+          <include>**/*.css</include>
         </includes>
       </resource>
     </resources>
