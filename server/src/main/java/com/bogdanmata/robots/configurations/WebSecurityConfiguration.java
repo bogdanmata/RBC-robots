@@ -23,11 +23,15 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.bogdanmata.robots.domains.UserDetail;
 import com.bogdanmata.robots.domains.errors.ErrorMessage;
+import com.bogdanmata.robots.security.domains.RobotUserDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -70,6 +74,26 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/__service/login")
         .usernameParameter("username")
         .passwordParameter("password")
+        .successHandler(new AuthenticationSuccessHandler() {
+          
+          private final ObjectMapper objectMapper = new ObjectMapper();
+          
+          @Override
+          public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+              throws IOException, ServletException {
+            
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            RobotUserDetails userDetails = (RobotUserDetails) authentication.getPrincipal();
+            response.getWriter().append(objectMapper.writeValueAsString(
+                UserDetail.builder()
+                  .username(userDetails.getUsername())
+                  .firstName(userDetails.getFirstName())
+                  .lastName(userDetails.getLastName())
+                  .build()));
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().flush();
+          }
+        })
         .failureHandler(new AuthenticationFailureHandler() {
 
           private final ObjectMapper objectMapper = new ObjectMapper();

@@ -1,4 +1,4 @@
-rbcRobotModule.controller('LoginController', [ '$scope', 'LoginFactory', function($scope, LoginFactory) {
+rbcRobotModule.controller('LoginController', [ '$scope', '$location', 'LoginFactory', function($scope, $location, LoginFactory) {
 
   $scope.username = '';
   $scope.password = '';
@@ -6,10 +6,11 @@ rbcRobotModule.controller('LoginController', [ '$scope', 'LoginFactory', functio
   $scope.errorMessage = '';
 
   $scope.submit = function() {
-    LoginFactory.login($scope.username, $scope.password).then(function(response) {
+    LoginFactory.login($scope.username, $scope.password).then(function(loggedUser) {
       $scope.errorMessage = '';
-    }, function(response) {
-      $scope.errorMessage = response;
+      $location.path('/');
+    }, function(error) {
+      $scope.errorMessage = error.errorMessage;
       console.log(msg);
     });
   };

@@ -20,26 +20,23 @@ rbcRobotModule.factory('LoginFactory', ['$http', '$q', 'LoginPathFactory', funct
               return str.join("&");
           },
           data: {username: username, password: password}
-      }).success(function () {
-        deferred.resolve(response);
+      }).then(function (response) {
+        deferred.resolve(response.data);
+      }, function(error) {
+        deferred.reject(error.data);
       });
 
-      // $http.post(LoginPathFactory.login(), {username: username, password: password}).then(function(response){
-      //   deferred.resolve(response);
-      // }, function(response){
-      //   deferred.reject(response);
-      // });
-      return deferred;
+      return deferred.promise;
     },
 
     logout: function() {
       var deferred = $q.defer();
-      $http.get(LoginPathFactory.login()).then(function(response){
-        deferred.resolve(response);
-      }, function(response){
-        deferred.reject(response);
+      $http.get(LoginPathFactory.logout()).then(function(response){
+        deferred.resolve(response.data);
+      }, function(error){
+        deferred.reject(error.data);
       });
-      return deferred;
+      return deferred.promise;
     }
   };
 

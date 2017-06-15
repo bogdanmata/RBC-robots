@@ -19,7 +19,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="robot in robots | orderBy: '-id'">
+					<tr ng-repeat="robot in robots | orderBy: 'name'">
 						<td>{{robot.id}}</td>
 						<td><a href="/robot/{{robot.id}}">{{robot.name}}</a></td>
 						<td>{{robot.price}}</td>
