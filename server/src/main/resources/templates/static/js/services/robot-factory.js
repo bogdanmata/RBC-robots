@@ -15,8 +15,8 @@ rbcRobotModule.factory('RobotFactory', ['$http', '$q', 'RobotPathFactory', funct
 
 			$http.post(RobotPathFactory.addRobotPath(), robot).then(function(response) {
 					deferred.resolve(response.data);
-				}, function(response) {
-					deferred.reject(response.data.message);
+				}, function(error) {
+					deferred.reject(error);
 			});
 			return deferred.promise;
 		},
@@ -26,8 +26,8 @@ rbcRobotModule.factory('RobotFactory', ['$http', '$q', 'RobotPathFactory', funct
 
 			$http.get(RobotPathFactory.getRobotPath(id)).then(function(response) {
 					deferred.resolve(response.data);
-				}, function(response) {
-					deferred.reject(response.data.message);
+				}, function(error) {
+					deferred.reject(error);
 			});
 			return deferred.promise;
 		},
@@ -37,8 +37,8 @@ rbcRobotModule.factory('RobotFactory', ['$http', '$q', 'RobotPathFactory', funct
 
 			$http.get(RobotPathFactory.getRobotsPath()).then(function(response) {
 					deferred.resolve(response.data);
-				}, function(response) {
-					deferred.reject(response.data.message);
+				}, function(error) {
+					deferred.reject(error);
 			});
 			return deferred.promise;
 		},
@@ -48,8 +48,8 @@ rbcRobotModule.factory('RobotFactory', ['$http', '$q', 'RobotPathFactory', funct
 
 			$http.delete(RobotPathFactory.deleteRobotPath(id)).then(function(response) {
 			    deferred.resolve(response.data);
-				},function(response) {
-					deferred.reject(response.data.message);
+				},function(error) {
+					deferred.reject(error);
 			});
 			return deferred.promise;
 		}
