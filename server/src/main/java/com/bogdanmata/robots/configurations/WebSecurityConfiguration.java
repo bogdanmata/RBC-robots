@@ -67,7 +67,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         })
         .and()
         .formLogin()
-        .loginProcessingUrl("/login")
+        .loginProcessingUrl("/__service/login")
         .usernameParameter("username")
         .passwordParameter("password")
         .failureHandler(new AuthenticationFailureHandler() {
@@ -85,7 +85,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             response.getWriter().flush();
           }
         })
-        .and().logout().logoutUrl("/logout")
+        .and().logout().logoutUrl("/__service/logout")
         .and().csrf().disable();
   }
 

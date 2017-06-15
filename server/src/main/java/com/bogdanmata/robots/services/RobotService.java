@@ -43,16 +43,19 @@ public class RobotService {
 
   @Autowired
   private RobotRepository robotRepository;
-  
+
   @Autowired
-  private UserRepository userRepository; 
+  private UserRepository  userRepository;
 
   @Transactional(readOnly = true)
   public List<RobotList> readAll() {
     return robotRepository.findAll().stream().map(new Function<RobotEntity, RobotList>() {
       public RobotList apply(RobotEntity entity) {
         return RobotList.builder()
+            .id(entity.getId())
             .name(entity.getName())
+            .price(entity.getPrice())
+            .adddedDate(entity.getCreationDate())
             .build();
       };
     }).collect(Collectors.toList());
@@ -73,6 +76,7 @@ public class RobotService {
 
     RobotEntity robotEntity = new RobotEntity();
     robotEntity.setName(robotDetail.getName());
+    robotEntity.setPrice(robotDetail.getPrice());
     robotEntity.setDescription(robotDetail.getDescription());
     robotEntity.setCreationDate(new Date());
     robotEntity.setCreatedBy(userEntity);
@@ -95,8 +99,11 @@ public class RobotService {
 
   private RobotDetail getRobotDetail(@NotNull RobotEntity entity) {
     return RobotDetail.builder()
+        .id(entity.getId())
         .name(entity.getName())
+        .price(entity.getPrice())
         .description(entity.getDescription())
+        .adddedDate(entity.getCreationDate())
         .build();
   }
 }

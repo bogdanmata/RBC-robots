@@ -32,7 +32,7 @@ import lombok.Setter;
 public class RobotDetail {
   private Long id;
   private String name;
-  private String description;
   private Float price;
+  private String description;
   private Date adddedDate;
 }

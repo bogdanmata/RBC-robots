@@ -18,12 +18,14 @@ import lombok.Setter;
  * Object for encapsulating the request for creating a new robot
  * 
  * Created Jun 12, 2017
+ * 
  * @author Bogdan MATA
  * @since 1.0
- * */
+ */
 @Getter
 @Setter
 public class RobotCreateRequest {
-  private String     name;
-  private String     description;
+  private String name;
+  private Float  price;
+  private String description;
 }

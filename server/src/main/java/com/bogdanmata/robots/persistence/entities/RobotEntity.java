@@ -49,6 +49,9 @@ public class RobotEntity {
   @Column(name = "name")
   private String     name;
 
+  @Column(name = "price")
+  private Float      price;
+
   @Column(name = "description")
   private String     description;
 

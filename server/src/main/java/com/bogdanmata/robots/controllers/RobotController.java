@@ -38,7 +38,7 @@ import com.bogdanmata.robots.services.RobotService;
  * @since 1.0
  */
 @RestController
-@RequestMapping("/robot")
+@RequestMapping("/__service/robot")
 public class RobotController {
 
   @Autowired
@@ -73,6 +73,7 @@ public class RobotController {
       @AuthenticationPrincipal RobotUserDetails userDetails) {
     return robotService.create(RobotDetail.builder()
         .name(request.getName())
+        .price(request.getPrice())
         .description(request.getDescription())
         .build(), userDetails.getUsername());
   }

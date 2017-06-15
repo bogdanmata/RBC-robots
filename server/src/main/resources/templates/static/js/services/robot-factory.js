@@ -1,24 +1,20 @@
 rbcRobotModule.factory('RobotPathFactory', function(){
 	return {
-		addRobotPath: function(){ return '/robot';},
-		getRobotPath: function(id){ return '/robot/' + id;},
-		getRobotsPath: function(){ return '/robot';},
-		deleteRobotPath: function(id){ return '/robot/' + id;}
+		addRobotPath: function(){ return '/__service/robot';},
+		getRobotPath: function(id){ return '/__service/robot/' + id;},
+		getRobotsPath: function(){ return '/__service/robot';},
+		deleteRobotPath: function(id){ return '/__service/robot/' + id;}
 	};
 });
 
 rbcRobotModule.factory('RobotFactory', ['$http', '$q', 'RobotPathFactory', function($http, $q, RobotPathFactory){
 	var factory = {
 
-    robots: [],
-
 		addRobot: function(robot){
 			var deferred = $q.defer();
 
 			$http.post(RobotPathFactory.addRobotPath(), robot).then(function(response) {
-					var robot = response.data;
-					factory.robots.push(robot);
-					deferred.resolve(robot);
+					deferred.resolve(response.data);
 				}, function(response) {
 					deferred.reject(response.data.message);
 			});
@@ -28,7 +24,7 @@ rbcRobotModule.factory('RobotFactory', ['$http', '$q', 'RobotPathFactory', funct
 		getRobot: function(id) {
 			var deferred = $q.defer();
 
-			$http.get(RobotPathFactory.getRobotPath()).then(function(response) {
+			$http.get(RobotPathFactory.getRobotPath(id)).then(function(response) {
 					deferred.resolve(response.data);
 				}, function(response) {
 					deferred.reject(response.data.message);

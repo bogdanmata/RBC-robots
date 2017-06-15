@@ -22,15 +22,17 @@ import lombok.Setter;
  * Robot domain class used for in lists
  * 
  * Created Jun 12, 2017
+ * 
  * @author Bogdan MATA
  * @since 1.0
- * */
+ */
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
 public class RobotList {
-  private Long id;
+  private Long   id;
   private String name;
-  private Date adddedDate;
+  private Float  price;
+  private Date   adddedDate;
 }

@@ -20,9 +20,10 @@ import lombok.Setter;
  * User detail
  * 
  * Created Jun 12, 2017
+ * 
  * @author Bogdan MATA
  * @since 1.0
- * */
+ */
 @Getter
 @Setter
 @AllArgsConstructor

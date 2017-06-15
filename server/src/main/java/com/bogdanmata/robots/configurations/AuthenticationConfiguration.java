@@ -48,6 +48,8 @@ public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerA
       }
       return RobotUserDetails.builder()
           .username(userEntity.getUsername())
+          .firstName(userEntity.getFirstName())
+          .lastName(userEntity.getLastName())
           .password(userEntity.getPassword())
           .accountNonExpired(true)
           .accountNonLocked(true)

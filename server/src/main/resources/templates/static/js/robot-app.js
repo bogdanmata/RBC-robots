@@ -1,9 +1,12 @@
 var rbcRobotModule = angular.module('rbcRobotApp', ['ngRoute']);
 
-rbcRobotModule.config(['$routeProvider', function($routeProvider) {
-	$routeProvider
+rbcRobotModule.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  
+  $locationProvider.html5Mode(true);
+	
+  $routeProvider
 	.when('/robot', {
-		templateUrl: 'partials/robots.html',
+		templateUrl: 'partials/robot-list.html',
 		controller: 'RobotListController',
 		resolve: { robots: getRobots }
 	})
@@ -12,7 +15,7 @@ rbcRobotModule.config(['$routeProvider', function($routeProvider) {
 		controller: 'RobotCreateController'
 	})
 	.when('/robot/:robotId', {
-		templateUrl: 'partials/robot.html',
+		templateUrl: 'partials/robot-view.html',
 		controller: 'RobotController',
 		resolve: { robot: getRobot }
 	})

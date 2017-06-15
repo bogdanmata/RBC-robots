@@ -1,7 +1,7 @@
 rbcRobotModule.factory('LoginPathFactory', function(){
   return {
-		login: function(){ return '/login';},
-		logout: function(id){ return '/logout';}
+		login: function(){ return '/__service/login';},
+		logout: function(id){ return '/__service/logout';}
 	};
 });
 
