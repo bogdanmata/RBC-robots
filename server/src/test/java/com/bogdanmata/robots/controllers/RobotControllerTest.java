@@ -50,6 +50,7 @@ import com.bogdanmata.robots.controllers.configurations.ControllerTestWebConfigu
 import com.bogdanmata.robots.domains.RobotDetail;
 import com.bogdanmata.robots.domains.RobotList;
 import com.bogdanmata.robots.domains.enums.UserRole;
+import com.bogdanmata.robots.persistence.repositories.UserRepository;
 import com.bogdanmata.robots.requests.RobotCreateRequest;
 import com.bogdanmata.robots.security.annotations.WithRobotUserDetails;
 import com.bogdanmata.robots.services.RobotService;
@@ -83,6 +84,8 @@ public class RobotControllerTest {
   protected ObjectMapper        mapper;
 
   @MockBean
+  private UserRepository        userRepository;
+  @MockBean
   protected RobotService        robotService;
 
   @BeforeClass
@@ -113,7 +116,7 @@ public class RobotControllerTest {
     public void testReadRobots() throws Exception {
       mvc
           .perform(
-              get("/robot")
+              get("/__service/robot")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isUnauthorized())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -126,7 +129,7 @@ public class RobotControllerTest {
     public void testReadRobot() throws Exception {
       mvc
           .perform(
-              get("/robot/1")
+              get("/__service/robot/1")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isUnauthorized())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -143,7 +146,7 @@ public class RobotControllerTest {
 
       mvc
           .perform(
-              post("/robot")
+              post("/__service/robot")
                   .accept(MediaType.APPLICATION_JSON_UTF8)
                   .contentType(MediaType.APPLICATION_JSON_UTF8)
                   .content(mapper.writeValueAsString(request)))
@@ -158,7 +161,7 @@ public class RobotControllerTest {
     public void testDeleteRobot() throws Exception {
       mvc
           .perform(
-              delete("/robot/1")
+              delete("/__service/robot/1")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isUnauthorized())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -180,17 +183,17 @@ public class RobotControllerTest {
               RobotList.builder()
                   .id(1L)
                   .name("Robot's name")
-                  .adddedDate(date)
+                  .addedDate(date)
                   .build(),
               RobotList.builder()
                   .id(2L)
                   .name("Robot's name")
-                  .adddedDate(date)
+                  .addedDate(date)
                   .build()));
 
       mvc
           .perform(
-              get("/robot")
+              get("/__service/robot")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isOk())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -211,12 +214,12 @@ public class RobotControllerTest {
           .name("Robot's name")
           .description("Description of the robot")
           .price(12.5F)
-          .adddedDate(date)
+          .addedDate(date)
           .build());
 
       mvc
           .perform(
-              get("/robot/1")
+              get("/__service/robot/1")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isOk())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -224,7 +227,7 @@ public class RobotControllerTest {
           .andExpect(jsonPath("$.name", Matchers.equalTo("Robot's name")))
           .andExpect(jsonPath("$.description", Matchers.equalTo("Description of the robot")))
           .andExpect(jsonPath("$.price", Matchers.equalTo(12.5)))
-          .andExpect(jsonPath("$.adddedDate", Matchers.equalTo(date.getTime())));
+          .andExpect(jsonPath("$.addedDate", Matchers.equalTo(date.getTime())));
 
       verify(robotService, times(1)).read(eq(1L));
       verifyNoMoreInteractions(robotService);
@@ -238,7 +241,7 @@ public class RobotControllerTest {
 
       mvc
           .perform(
-              post("/robot")
+              post("/__service/robot")
                   .accept(MediaType.APPLICATION_JSON_UTF8)
                   .contentType(MediaType.APPLICATION_JSON_UTF8)
                   .content(mapper.writeValueAsString(request)))
@@ -253,7 +256,7 @@ public class RobotControllerTest {
     public void testDeleteRobot() throws Exception {
       mvc
           .perform(
-              delete("/robot/1")
+              delete("/__service/robot/1")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isForbidden())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -275,17 +278,17 @@ public class RobotControllerTest {
               RobotList.builder()
                   .id(1L)
                   .name("Robot's name")
-                  .adddedDate(date)
+                  .addedDate(date)
                   .build(),
               RobotList.builder()
                   .id(2L)
                   .name("Robot's name")
-                  .adddedDate(date)
+                  .addedDate(date)
                   .build()));
 
       mvc
           .perform(
-              get("/robot")
+              get("/__service/robot")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isOk())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -306,12 +309,12 @@ public class RobotControllerTest {
           .name("Robot's name")
           .description("Description of the robot")
           .price(12.5F)
-          .adddedDate(date)
+          .addedDate(date)
           .build());
 
       mvc
           .perform(
-              get("/robot/1")
+              get("/__service/robot/1")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isOk())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -319,7 +322,7 @@ public class RobotControllerTest {
           .andExpect(jsonPath("$.name", Matchers.equalTo("Robot's name")))
           .andExpect(jsonPath("$.description", Matchers.equalTo("Description of the robot")))
           .andExpect(jsonPath("$.price", Matchers.equalTo(12.5)))
-          .andExpect(jsonPath("$.adddedDate", Matchers.equalTo(date.getTime())));
+          .andExpect(jsonPath("$.addedDate", Matchers.equalTo(date.getTime())));
 
       verify(robotService, times(1)).read(eq(1L));
       verifyNoMoreInteractions(robotService);
@@ -342,7 +345,7 @@ public class RobotControllerTest {
 
       mvc
           .perform(
-              post("/robot")
+              post("/__service/robot")
                   .accept(MediaType.APPLICATION_JSON_UTF8)
                   .contentType(MediaType.APPLICATION_JSON_UTF8)
                   .content(mapper.writeValueAsString(request)))
@@ -365,12 +368,12 @@ public class RobotControllerTest {
           .name("Robot's name")
           .description("Description of the robot")
           .price(12.5F)
-          .adddedDate(date)
+          .addedDate(date)
           .build());
 
       mvc
           .perform(
-              delete("/robot/1")
+              delete("/__service/robot/1")
                   .accept(MediaType.APPLICATION_JSON_UTF8))
           .andExpect(status().isOk())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -378,7 +381,7 @@ public class RobotControllerTest {
           .andExpect(jsonPath("$.name", Matchers.equalTo("Robot's name")))
           .andExpect(jsonPath("$.description", Matchers.equalTo("Description of the robot")))
           .andExpect(jsonPath("$.price", Matchers.equalTo(12.5)))
-          .andExpect(jsonPath("$.adddedDate", Matchers.equalTo(date.getTime())));
+          .andExpect(jsonPath("$.addedDate", Matchers.equalTo(date.getTime())));
 
       verify(robotService, times(1)).delete(eq(1L));
       verifyNoMoreInteractions(robotService);

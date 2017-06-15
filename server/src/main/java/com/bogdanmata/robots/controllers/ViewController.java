@@ -13,12 +13,9 @@ package com.bogdanmata.robots.controllers;
 
 import java.util.Date;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.bogdanmata.robots.security.domains.RobotUserDetails;
 
 /**
  * TODO add description
@@ -31,13 +28,9 @@ import com.bogdanmata.robots.security.domains.RobotUserDetails;
 @Controller
 public class ViewController {
   
-  @RequestMapping({"/", "/robot", "/robot/*", "/login"})
-  public String index(
-      Model model, 
-      @AuthenticationPrincipal RobotUserDetails userDetails) {
-    model.addAttribute("user", userDetails == null ? RobotUserDetails.builder().username("anonymous").build() : userDetails);
+  @RequestMapping({"/", "/robot", "/robot/*", "/login"}) // all declared routes should also be declare here
+  public String index(Model model) {
     model.addAttribute("datetime", new Date());
-
     return "index";
   }
 }

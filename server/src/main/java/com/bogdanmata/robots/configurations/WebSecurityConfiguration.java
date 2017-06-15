@@ -50,8 +50,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
-        .authorizeRequests().antMatchers("/", "/index.html", "/static/**", "/js/**", "/css/**", "/partials/**", "/login").permitAll()
-        .and().authorizeRequests().anyRequest().fullyAuthenticated()
+        .authorizeRequests().anyRequest().permitAll()
+        .and().authorizeRequests().antMatchers("/__service/**").fullyAuthenticated()
         .and()
         .exceptionHandling()
         .authenticationEntryPoint(new AuthenticationEntryPoint() {

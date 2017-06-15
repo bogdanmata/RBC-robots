@@ -55,7 +55,7 @@ public class RobotService {
             .id(entity.getId())
             .name(entity.getName())
             .price(entity.getPrice())
-            .adddedDate(entity.getCreationDate())
+            .addedDate(entity.getCreationDate())
             .build();
       };
     }).collect(Collectors.toList());
@@ -103,7 +103,7 @@ public class RobotService {
         .name(entity.getName())
         .price(entity.getPrice())
         .description(entity.getDescription())
-        .adddedDate(entity.getCreationDate())
+        .addedDate(entity.getCreationDate())
         .build();
   }
 }

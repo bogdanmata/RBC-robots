@@ -34,5 +34,5 @@ public class RobotDetail {
   private String name;
   private Float price;
   private String description;
-  private Date adddedDate;
+  private Date addedDate;
 }

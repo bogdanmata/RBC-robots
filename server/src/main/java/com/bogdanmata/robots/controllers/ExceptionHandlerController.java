@@ -18,10 +18,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.bogdanmata.robots.domains.errors.ErrorMessage;
+import com.bogdanmata.robots.security.domains.RobotUserDetails;
 
 /**
  * The exceptions controller
@@ -43,10 +45,17 @@ public class ExceptionHandlerController {
   }
   
   @ExceptionHandler(AccessDeniedException.class)
-  public ResponseEntity<ErrorMessage> exception(AccessDeniedException exception) {
-    ErrorMessage errorMessage = ErrorMessage.builder().errorCode("access.denied").errorMessage(exception.getMessage()).build();
+  public ResponseEntity<ErrorMessage> exception(AccessDeniedException exception, @AuthenticationPrincipal RobotUserDetails userDetails) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+    
+    // in the case if the user is not authenticate
+    if(userDetails == null) {
+      ErrorMessage errorMessage = ErrorMessage.builder().errorCode("authentication.exception.required").errorMessage(exception.getMessage()).build();
+      return new ResponseEntity<ErrorMessage>(errorMessage, headers, HttpStatus.UNAUTHORIZED);
+    }
+    
+    ErrorMessage errorMessage = ErrorMessage.builder().errorCode("access.denied").errorMessage(exception.getMessage()).build();
     return new ResponseEntity<ErrorMessage>(errorMessage, headers, HttpStatus.FORBIDDEN);
   }
 }

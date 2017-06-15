@@ -34,5 +34,5 @@ public class RobotList {
   private Long   id;
   private String name;
   private Float  price;
-  private Date   adddedDate;
+  private Date   addedDate;
 }
