@@ -29,8 +29,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
-    "com.bogdanmata.robots.controllers",
-    "com.bogdanmata.robots.services"
+    "com.bogdanmata.robots.controllers"
 })
 public class WebConfiguration extends WebMvcConfigurerAdapter {
   private static final String[] CLASSPATH_RESOURCE_LOCATIONS = { "classpath:/templates/static/" };

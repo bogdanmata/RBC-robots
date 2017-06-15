@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * TODO add description
+ * The controller for all HTML pages
  * 
  * Created Jun 15, 2017
  * 
@@ -27,8 +27,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ViewController {
-  
-  @RequestMapping({"/", "/robot", "/robot/*", "/login"}) // all declared routes should also be declare here
+
+  /**
+   * Mapping for index page
+   * 
+   * @param model
+   *          the model
+   * 
+   * @return index
+   */
+  @RequestMapping({ "/", "/robot", "/robot/*", "/login" }) // all declared routes should also be declare here
   public String index(Model model) {
     model.addAttribute("datetime", new Date());
     return "index";

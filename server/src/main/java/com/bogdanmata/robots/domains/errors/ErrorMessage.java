@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * TODO add description
+ * Wrapper for error sent to the client
  * 
  * Created Jun 12, 2017
  * @author Bogdan MATA
@@ -29,5 +29,5 @@ import lombok.Setter;
 @Builder
 public class ErrorMessage {
   private String errorCode;
-  private String errorMessage;
+  private String errorMessageDetails;
 }

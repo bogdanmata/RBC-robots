@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * User detail
+ * User detail class
  * 
  * Created Jun 12, 2017
  * 

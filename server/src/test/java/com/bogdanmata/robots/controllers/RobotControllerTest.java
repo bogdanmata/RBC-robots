@@ -22,10 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.hamcrest.Matchers;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -72,7 +69,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 })
 @SpringBootTest(classes = ControllerTestWebConfiguration.class)
 @WebAppConfiguration
-public class RobotControllerTest {
+public class RobotControllerTest { // NOSONAR
 
   @Autowired
   private WebApplicationContext context;
@@ -88,14 +85,6 @@ public class RobotControllerTest {
   @MockBean
   protected RobotService        robotService;
 
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
-  }
-
   @Before
   public void setUp() throws Exception {
     mapper = Jackson2ObjectMapperBuilder.json().build();
@@ -103,10 +92,6 @@ public class RobotControllerTest {
         .webAppContextSetup(context)
         .apply(SecurityMockMvcConfigurers.springSecurity(springSecurityFilterChain))
         .build();
-  }
-
-  @After
-  public void tearDown() throws Exception {
   }
 
   @WithAnonymousUser

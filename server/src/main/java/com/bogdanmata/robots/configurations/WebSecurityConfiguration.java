@@ -63,7 +63,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
               throws IOException, ServletException {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             ErrorMessage errorMessage =
-                ErrorMessage.builder().errorCode("authentication.exception.required").errorMessage(authenticationException.getMessage()).build();
+                ErrorMessage.builder().errorCode("authentication.exception.required").errorMessageDetails(authenticationException.getMessage()).build();
             response.getWriter().append(objectMapper.writeValueAsString(errorMessage));
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().flush();
@@ -103,7 +103,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
               throws IOException, ServletException {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             ErrorMessage errorMessage =
-                ErrorMessage.builder().errorCode("authentication.exception.wrong").errorMessage(authenticationException.getMessage()).build();
+                ErrorMessage.builder().errorCode("authentication.exception.wrong").errorMessageDetails(authenticationException.getMessage()).build();
             response.getWriter().append(objectMapper.writeValueAsString(errorMessage));
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().flush();

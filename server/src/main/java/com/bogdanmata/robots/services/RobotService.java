@@ -13,7 +13,6 @@ package com.bogdanmata.robots.services;
 
 import java.util.Date;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
@@ -47,20 +46,31 @@ public class RobotService {
   @Autowired
   private UserRepository  userRepository;
 
+  /**
+   * Retrieves all robots
+   * 
+   * @return all robots
+   */
   @Transactional(readOnly = true)
   public List<RobotList> readAll() {
-    return robotRepository.findAll().stream().map(new Function<RobotEntity, RobotList>() {
-      public RobotList apply(RobotEntity entity) {
-        return RobotList.builder()
-            .id(entity.getId())
-            .name(entity.getName())
-            .price(entity.getPrice())
-            .addedDate(entity.getCreationDate())
-            .build();
-      };
-    }).collect(Collectors.toList());
+    return robotRepository.findAll().stream().map(entity -> RobotList.builder()
+        .id(entity.getId())
+        .name(entity.getName())
+        .price(entity.getPrice())
+        .addedDate(entity.getCreationDate())
+        .build()).collect(Collectors.toList());
   }
 
+  /**
+   * Retrieves the given robot
+   * 
+   * @param robotId
+   *          the robot identifier
+   * 
+   * @return the robot
+   * @throws NotFoundException
+   *           when the robot is not found
+   */
   @Transactional(readOnly = true)
   public RobotDetail read(Long robotId) {
     RobotEntity entity = robotRepository.findOne(robotId);
@@ -70,6 +80,16 @@ public class RobotService {
     return getRobotDetail(entity);
   }
 
+  /**
+   * Creates a new robot
+   * 
+   * @param robotDetail
+   *          the robot details
+   * @param username
+   *          the name of the user
+   * 
+   * @return the robot
+   */
   @Transactional
   public RobotDetail create(RobotDetail robotDetail, String username) {
     UserEntity userEntity = userRepository.getOne(username);
@@ -86,6 +106,16 @@ public class RobotService {
     return getRobotDetail(robotEntity);
   }
 
+  /**
+   * Delete the given robot
+   * 
+   * @param robotId
+   *          the robot identifier
+   * 
+   * @return the robot
+   * @throws NotFoundException
+   *           when the robot is not found
+   */
   @Transactional
   public RobotDetail delete(Long robotId) {
     RobotEntity robotEntity = robotRepository.findOne(robotId);

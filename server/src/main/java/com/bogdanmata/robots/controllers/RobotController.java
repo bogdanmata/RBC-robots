@@ -45,8 +45,10 @@ public class RobotController {
   private RobotService robotService;
 
   /**
+   * Method for mapping the GET /__service/robot
    * 
-   * */
+   * @return all robots
+   */
   @Secured("ROLE_ROBOT_READ")
   @RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public List<RobotList> readRobots() {
@@ -54,8 +56,13 @@ public class RobotController {
   }
 
   /**
+   * Method for mapping the GET /__service/robot/{robotId}
    * 
-   * */
+   * @param robotId
+   *          the id of the robot
+   * 
+   * @return the given robot
+   */
   @Secured("ROLE_ROBOT_READ")
   @RequestMapping(path = "/{robotId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public RobotDetail readRobot(
@@ -64,8 +71,15 @@ public class RobotController {
   }
 
   /**
+   * Method for mapping the POST /__service/robot
    * 
-   * */
+   * @param request
+   *          the information for the new robot
+   * @param userDetails
+   *          the authenticated user
+   * 
+   * @return the new robot
+   */
   @Secured("ROLE_ROBOT_EDIT")
   @RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public RobotDetail createRobot(
@@ -79,8 +93,13 @@ public class RobotController {
   }
 
   /**
+   * Method for mapping the DELETE /__service/robot/{robotId}
    * 
-   * */
+   * @param robotId
+   *          the id of the robot
+   * 
+   * @return the deleted robot
+   */
   @Secured("ROLE_ROBOT_DELETE")
   @RequestMapping(path = "/{robotId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public RobotDetail deleteRobot(

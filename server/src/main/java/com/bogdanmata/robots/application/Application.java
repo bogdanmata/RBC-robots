@@ -33,12 +33,18 @@ import lombok.extern.slf4j.Slf4j;
 })
 @Slf4j
 public class Application extends SpringBootServletInitializer {
-  
+
   @Override
   protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
     return builder.sources(Application.class);
   }
 
+  /**
+   * The main entry in the application
+   * 
+   * @param args
+   *          the arguments
+   */
   public static void main(String[] args) {
     log.debug("Application starting");
     SpringApplication.run(Application.class, args); // NOSONAR This is false positive

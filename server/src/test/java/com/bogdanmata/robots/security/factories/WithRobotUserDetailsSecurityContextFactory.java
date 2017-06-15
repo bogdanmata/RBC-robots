@@ -30,7 +30,7 @@ import com.bogdanmata.robots.security.annotations.WithRobotUserDetails;
 import com.bogdanmata.robots.security.domains.RobotUserDetails;
 
 /**
- * TODO add description
+ * Helper class for authentication
  * 
  * Created Jun 12, 2017
  * 

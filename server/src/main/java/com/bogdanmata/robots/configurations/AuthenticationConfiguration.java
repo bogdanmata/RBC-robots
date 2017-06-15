@@ -11,22 +11,25 @@
  */
 package com.bogdanmata.robots.configurations;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.bogdanmata.robots.persistence.entities.UserEntity;
+import com.bogdanmata.robots.persistence.entities.UserRoleEntity;
 import com.bogdanmata.robots.persistence.repositories.UserRepository;
 import com.bogdanmata.robots.security.domains.RobotUserDetails;
 
 /**
- * TODO add description
+ * The authentication configuration
  * 
  * Created Jun 15, 2017
  * 
@@ -38,7 +41,7 @@ public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerA
 
   @Autowired
   private UserRepository userRepository;
-  
+
   @Bean
   public UserDetailsService getUserDetailsService() {
     return username -> {
@@ -46,25 +49,30 @@ public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerA
       if (userEntity == null) {
         throw new UsernameNotFoundException("The user was not found.");
       }
-      return RobotUserDetails.builder()
-          .username(userEntity.getUsername())
-          .firstName(userEntity.getFirstName())
-          .lastName(userEntity.getLastName())
-          .password(userEntity.getPassword())
-          .accountNonExpired(true)
-          .accountNonLocked(true)
-          .credentialsNonExpired(true)
-          .enabled(true)
-          .authorities(
-              AuthorityUtils.createAuthorityList(
-                  userEntity.getRoles()
-                    .stream()
-                    .map((role) -> {return "ROLE_" + role.getId().getRole().name();})
-                    .collect(Collectors.toList())
-                    .toArray(new String[]{})
-              )
-          )
-          .build();
+      return createRobotUserDetails(userEntity);
     };
+  }
+
+  private RobotUserDetails createRobotUserDetails(UserEntity userEntity) {
+    return RobotUserDetails.builder()
+        .username(userEntity.getUsername())
+        .firstName(userEntity.getFirstName())
+        .lastName(userEntity.getLastName())
+        .password(userEntity.getPassword())
+        .accountNonExpired(true)
+        .accountNonLocked(true)
+        .credentialsNonExpired(true)
+        .enabled(true)
+        .authorities(reduceRoles(userEntity.getRoles()))
+        .build();
+  }
+
+  private List<GrantedAuthority> reduceRoles(List<UserRoleEntity> roles) {
+    return AuthorityUtils.createAuthorityList(
+        roles
+            .stream()
+            .map(role -> "ROLE_" + role.getId().getRole().name())
+            .collect(Collectors.toList())
+            .toArray(new String[] {}));
   }
 }

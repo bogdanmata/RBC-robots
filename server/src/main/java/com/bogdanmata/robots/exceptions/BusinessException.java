@@ -31,11 +31,33 @@ public class BusinessException extends RuntimeException {
 
   private final String      code;
 
+  /**
+   * Constructor
+   * 
+   * @param code
+   *          the code for exception
+   * @param message
+   *          the message if the exception
+   * 
+   * @see {{@link RuntimeException#RuntimeException(String)}
+   */
   public BusinessException(String code, String message) {
     super(message);
     this.code = code;
   }
 
+  /**
+   * Constructor
+   * 
+   * @param code
+   *          the code for exception
+   * @param message
+   *          the message if the exception
+   * @param cause
+   *          the cause
+   * 
+   * @see {{@link RuntimeException#RuntimeException(String, Throwable)}
+   */
   public BusinessException(String code, String message, Throwable cause) {
     super(message, cause);
     this.code = code;
