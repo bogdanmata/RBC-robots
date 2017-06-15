@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -52,7 +53,7 @@ public class UserEntity {
   @Column(name = "email_address")
   private String               emailAddress;
 
-  @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
   private List<UserRoleEntity> roles;
 
 }
