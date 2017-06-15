@@ -40,6 +40,8 @@ public class RobotUserDetails implements UserDetails {
 
   private final String                                 username;
   private final String                                 password;
+  private final String                                 firstName;
+  private final String                                 lastName;
   private final boolean                                accountNonExpired;
   private final boolean                                accountNonLocked;
   private final boolean                                credentialsNonExpired;
