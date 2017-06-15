@@ -1,0 +1,42 @@
+<div>
+	<div class="row">
+		<div class="col-lg-offset-2 col-lg-8">
+			<div>
+				<div class="btn-group" role="group">
+					<a href="/robot" class="btn btn-default">Return to list</a>
+					<a href="/robot/create" class="btn btn-default">Add a new robot</a>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<table class="col-lg-offset-2 col-lg-2 table">
+					<tbody>
+						<tr class="">
+							<th class="col-lg-3">Name:</th>
+							<td class="col-lg-9"><p>{{robot.name}}</p></td>
+						</tr>
+						<tr>
+							<th>Price:</th>
+							<td><p>{{robot.price}}</p></td>
+						</tr>
+						<tr>
+              <th>Description:</th>
+              <td><p>{{robot.description}}</p></td>
+            </tr>
+            <tr>
+              <th>Created:</th>
+              <td><p>{{robot.addedDate}}</p></td>
+            </tr>
+					</tbody>
+				</table>
+				<div class="row col-lg-offset-2 col-lg-12 ">
+					<div class="col-lg-5">
+						<input type="button" ng-click="deleteRobot()" value="Remove robot" class="btn btn-danger" />
+					</div>
+					<div class="col-lg-7 has-error">
+						<span class="help-block" ng-show="(errorMessage!='a')">{{errorMessage}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

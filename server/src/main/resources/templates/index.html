@@ -10,20 +10,8 @@
 
 </head>
 <body ng-app="rbcRobotApp">
-	<header>
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/">RBC Robots</a>
-					<a class="navbar-text" href="/robot">Robot list</a>
-				</div>
-				<a ng-if="!$rootScope.currentUser" class="navbar-text navbar-right" style="margin-right: 10px;" href="/login">Log in</a>
-				<p ng-if="!$rootScope.currentUser" class="navbar-text navbar-right" style="margin-right: 10px;">Not signed in</p>
-				
-				<a ng-if="$rootScope.currentUser" class="navbar-text navbar-right" style="margin-right: 10px;" href="/logout">Log out</a>
-				<p ng-if="$rootScope.currentUser" class="navbar-text navbar-right" style="margin-right: 10px;">Signed in as {{$rootScope.currentUser.firstName}} {{$rootScope.currentUser.lastName}}</p>
-			</div>
-		</nav>
+	<header ng-controller="HeaderController" >
+	  <ng-include src="'partials/includes/header.html'" />
 	</header>
 
 	<div ng-view=""></div>
@@ -43,6 +31,7 @@
 	<script type="text/javascript" src="/static/js/filters/robot-filter.js" th:src="@{/js/filters/robot-filter.js}"></script>
 	<script type="text/javascript" src="/static/js/services/login-factory.js" th:src="@{/js/services/login-factory.js}"></script>
 	<script type="text/javascript" src="/static/js/services/robot-factory.js" th:src="@{/js/services/robot-factory.js}"></script>
+	<script type="text/javascript" src="/static/js/controllers/login-controller.js" th:src="@{/js/controllers/page-controller.js}"></script>
 	<script type="text/javascript" src="/static/js/controllers/login-controller.js" th:src="@{/js/controllers/login-controller.js}"></script>
 	<script type="text/javascript" src="/static/js/controllers/robot-controller.js" th:src="@{/js/controllers/robot-controller.js}"></script>
 </body>

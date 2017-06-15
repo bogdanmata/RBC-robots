@@ -8,7 +8,7 @@ rbcRobotModule.controller('LoginController', [ '$rootScope', '$scope', '$locatio
   $scope.submit = function() {
     LoginFactory.login($scope.username, $scope.password).then(function(loggedUser) {
       $scope.errorMessage = '';
-      $rootScope.currentUser = loggedUser;
+      $rootScope.$broadcast('UserLoginEvent', loggedUser);
       $location.path('/');
     }, function(error) {
       $scope.errorMessage = error.errorMessage;
@@ -20,4 +20,5 @@ rbcRobotModule.controller('LoginController', [ '$rootScope', '$scope', '$locatio
     $scope.username = '';
     $scope.password = '';
   };
+
 } ]);

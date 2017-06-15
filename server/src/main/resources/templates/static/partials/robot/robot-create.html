@@ -1,0 +1,55 @@
+<div>
+	<div class="row">
+		<div class="col-lg-offset-2 col-lg-8">
+			<div class="row">
+				<div class="col-lg-2 btn-group vcenter" role="group">
+					<a href="/robot" class="btn btn-default">Return to robots list</a>
+				</div>
+        <div class="col-lg-4 vcenter text-info" ng-if="loading">
+					<strong>Currently trying to add a new robot...</strong>
+				</div>
+        <div class="col-lg-4 vcenter text-success" ng-if="isNewPetCreated">
+					<strong>A new robot has just been added.</strong>
+				</div>
+			</div>
+			<form ng-submit="submit()" role="form" class="form-horizontal" name="robotCreateForm" novalidate>
+				<div class="form-group" ng-class="{'has-error': (robotCreateForm.robotName.$error.required)}">
+					<label class="control-label col-lg-2" for="robotName">Name:</label>
+					<div class="col-lg-4">
+						<input type="text" id="robotName" name="robotName" class="form-control" ng-model="robot.name" placeholder="Enter a robot name" required>
+					</div>
+					<div class="col-lg-3">
+						<span class="help-block"
+							ng-show="(robotCreateForm.robotName.$error.required)">Please enter a robot name</span>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{'has-error': (robotCreateForm.robotPrice.$error.required)}">
+          <label class="control-label col-lg-2" for="robotPrice">Price:</label>
+          <div class="col-lg-4">
+            <input type="number" id="robotPrice" name="robotPrice" class="form-control" ng-model="robot.price" placeholder="Enter the robot price" required>
+          </div>
+          <div class="col-lg-3">
+            <span class="help-block"
+              ng-show="(robotCreateForm.robotName.$error.required)">Please enter a robot name</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-lg-2" for="robotDescription">Description:</label>
+          <div class="col-lg-4">
+            <textarea type="text" id="robotDescription" name="robotDescription" class="form-control" ng-model="robot.description" placeholder="Enter the robot description"></textarea>
+          </div>
+        </div>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-4">
+						<input type="submit" value="Add robot" class="btn btn-primary">
+						<input type="reset" class="btn btn-default">
+					</div>
+					<div class="col-lg-6 has-error">
+						<span class="help-block" ng-show="(errorMessage!='')">{{errorMessage}}</span>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
